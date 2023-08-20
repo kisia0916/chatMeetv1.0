@@ -1,7 +1,7 @@
 let p2pID = document.getElementById("userId").textContent
 let peer = new Peer(p2pID,{
-    host: '192.168.11.10',
-    port: 9000,
+    host: '0.tcp.jp.ngrok.io',
+    port: 17088,
     path: '/',
 })
 let conList = []
