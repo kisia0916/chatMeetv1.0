@@ -1,9 +1,9 @@
 let p2pID = document.getElementById("userId").textContent
 let peer = new Peer(p2pID,{
-    host: '192.168.11.18',
+    host: '192.168.11.10',
     port: 9000,
     path: '/',
-}); 
+})
 let conList = []
 let streamList = []
 let peerList = []
