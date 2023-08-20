@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+<body>
+    <span style="display: none;" id="userId"><%=userId%></span>
+    <script>
+        let Socket = io()
+    </script>
+    <h1>main</h1>
+    <div class="publicRoomList">
+
+    </div>
+    <script src="/public/src/mainPage/main.js"></script>
+    <script src="/public/src/mainPage/socketon.js"></script>
+    <script src="/public/doms/roomListDom.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <script>
+        let Socket = io()
+    </script>
+
+    <span id="userId"><%=userId%></span>
+    <span id="roomId"><%=roomId%></span>
+    <span id="flg"><%=flg%></span>
+    <h1>call</h1>
+    <div id="audioWindowsWaerpp"></div>
+    <div id="videoWindowsWarpp">
+    </div>
+    <button onclick="camChange()">cam</button>
+    <button onclick="changeMike()">cam</button>
+
+    <script src="/public/src/callPage/call.js"></script>
+    <script src="/public/src/callPage/p2p.js"></script>
+    <script src="/public/doms/videoWindows.js"></script>
+    <script src="/public/doms/audioDoms.js"></script>
+
+</body>
+</html>

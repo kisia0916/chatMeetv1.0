@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <span style="display: none;" id="userId"><%=userId%></span>
+    <script>
+        let Socket = io()
+    </script>
+    <h1>createRoom</h1>
+    <input type="text" id="createRoomName"/>
+    <input type="text" id="createRoomPass"/>
+    <button onclick="createRoom()">作成</button>
+    <script src="/public/src/createPage/createMain.js"></script>
+    <script src="/public/src/createPage/socketFuns.js"></script>
+
+</body>
+</html>
