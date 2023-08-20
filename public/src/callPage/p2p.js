@@ -1,6 +1,6 @@
 let p2pID = document.getElementById("userId").textContent
 let peer = new Peer(p2pID,{
-    host: '0.tcp.jp.ngrok.io',
+    host: 'addc-202-226-131-17.ngrok-free.app',
     port: 17088,
     path: '/',
 })
