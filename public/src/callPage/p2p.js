@@ -1,8 +1,8 @@
 let p2pID = document.getElementById("userId").textContent
 let peer = new Peer(p2pID,{
-    host: 'addc-202-226-131-17.ngrok-free.app',
-    port: 80,
-    path: '/',
+    secure:true,
+    host:'dadf-202-226-131-17.ngrok-free.app',
+    port:443
 })
 let conList = []
 let streamList = []
