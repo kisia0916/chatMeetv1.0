@@ -83,8 +83,8 @@ Socket.on("setUserNew",async(data)=>{
             }
         })
     }else{
-        caminit(false)
-        audioInit(false)
+        caminit(true)
+        audioInit(true)
     }
 })
 Socket.on("joinUser",(data)=>{
