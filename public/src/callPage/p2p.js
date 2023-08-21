@@ -132,7 +132,7 @@ peer.on("call",(call)=>{
             console.log(userAudio)
             if(call.peer != p2pID)
                 userAudio.srcObject = stream
-                userAudio.play()
+                // userAudio.play()
         }
     })
 })
