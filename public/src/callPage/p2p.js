@@ -77,8 +77,8 @@ Socket.on("setUserNew",async(data)=>{
                     console.log(`${i.userId}に接続しました`)
                     if(conCO >= userList.length-1){
                         console.log(camStream)
-                        caminit(true)
-                        audioInit(true)
+                        // caminit(true)
+                        // audioInit(true)
                     }
                 })
             }
@@ -113,6 +113,8 @@ function sleep(waitMsec) {
   }
 peer.on('connection', (conn) => {
     console.log(`${conn.peer}からの接続あり`);
+    caminit(true)
+    audioInit(true)
 });
 peer.on("call",(call)=>{
     console.log("bbb")
