@@ -1,8 +1,9 @@
 let p2pID = document.getElementById("userId").textContent
 let peer = new Peer(p2pID,{
-    secure:true,
-    host:'dadf-202-226-131-17.ngrok-free.app',
-    port:443
+    host: 'peerserverinheroku-2753ea32a44b.herokuapp.com',
+    port: 443,
+    path: '/myapp',
+    secure: true,
 })
 let conList = []
 let streamList = []
