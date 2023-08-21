@@ -28,8 +28,8 @@ const caminit = (firstFlg)=>{
             sendVideo(camStream)
         }
     }
-    ).catch(()=>{
-
+    ).catch((err)=>{
+        console.log("camError"+err)
     })
 }
 

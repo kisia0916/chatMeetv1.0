@@ -66,6 +66,7 @@ Socket.on("setUserNew",async(data)=>{
     videoWarpp.innerHTML = videoWindow(userList,p2pID)
     if(userList.length-1>0){
         console.log("eee")
+        console.log("2")
         userList.forEach((i)=>{
             if(i.userId != p2pID){
                 console.log(i.userId)
@@ -83,6 +84,7 @@ Socket.on("setUserNew",async(data)=>{
             }
         })
     }else{
+        console.log("1")
         caminit(true)
         audioInit(true)
     }
