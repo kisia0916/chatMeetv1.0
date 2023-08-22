@@ -21,11 +21,12 @@ const createData = require("./backSrc/createData")
 let userList = []
 let roomList = [ {
     roomId: 'f5934665-bf0d-4356-8777-6a9a25ed1000',
-    roomName: 'aa',
+    roomName: 'seccamp23 Meet',
     host: '36019a51-1371-4d43-8521-76cde88c7a61',
     pass: 'aa',
     userList: [],
-    public: true
+    public: true,
+    icon:"/public/icons/icon1.png"
   }]
 
 

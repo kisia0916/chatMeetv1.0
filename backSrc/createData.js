@@ -12,8 +12,10 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
     createRoomData:function(host,pass,name,public){
+        let iconNum = Math.floor(Math.random()*15)
+        console.log(iconNum)
         let roomId = uuidv4()
-        return {roomId:roomId,roomName:name,host:host,pass:pass,userList:[],public:public}
+        return {roomId:roomId,roomName:name,host:host,pass:pass,userList:[],public:public,icon:`/public/icons/icon${iconNum}.png`}
     },
     createUser:function(userId,page){
         return {userId:userId,page:page}

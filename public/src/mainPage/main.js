@@ -7,3 +7,6 @@ const initPage = (roomList)=>{
     let listWarpp = document.querySelector(".publicRoomList")
     listWarpp.innerHTML = roomListDom(roomList)
 }
+const moveCreatet = ()=>{
+    location.href = "/mkcall"
+}
