@@ -7,21 +7,49 @@ const videoWindow = (userList,userId)=>{
         if(i.userId == userId){
             if(index == 0){
                 return`
-                    <video id = "myVideo" class="firstVideo" muted="muted" width="600" height="500" autoplay></video>
+                    <div class="videoWindowMain firstVideo">
+                        <div class="videoWindowWarpp">
+                            <video id = "myVideo" class="videoMainWindow" muted="muted" autoplay></video>
+                        </div>
+                        <div class="videoWindowNameWarpp">
+                            <span class="videoWindowName">userName</span>
+                        </div>
+                    </div>
                 `
             }else{
                 return`
-                    <video id = "myVideo" muted="muted" width="600" height="500" autoplay></video>
+                    <div class="videoWindowMain">
+                        <div class="videoWindowWarpp">
+                            <video id = "myVideo"  class="videoMainWindow" muted="muted" width="600" height="500" autoplay></video>
+                        </div>
+                        <div class="videoWindowNameWarpp">
+                            <span class="videoWindowName">userName</span>
+                        </div>
+                    </div>
                 `
             }
         }else{
             if(index == 0){
                 return`
-                    <video id = "video:${i.userId}" class="firstVideo" muted="muted" width="600" height="500" autoplay></video>
+                    <div class="videoWindowMain firstVideo">
+                    <div class="videoWindowWarpp">
+                        <video id = "video:${i.userId}" class="videoMainWindow" muted="muted" width="600" height="500" autoplay></video>
+                    </div>
+                    <div class="videoWindowNameWarpp">
+                        <span class="videoWindowName">userName</span>
+                    </div>
+                    </div>
                 `
             }else{
                 return`
-                    <video id = "video:${i.userId}" muted="muted" width="600" height="500" autoplay></video>
+                    <div class="videoWindowMain">
+                    <div class="videoWindowWarpp">
+                        <video id = "video:${i.userId}" muted="muted" class="videoMainWindow" width="600" height="500" autoplay></video>
+                    </div>
+                    <div class="videoWindowNameWarpp">
+                        <span class="videoWindowName">userName</span>
+                    </div>
+                    </div>
                 `
             }
         }
@@ -30,7 +58,14 @@ const videoWindow = (userList,userId)=>{
 }
 const videoWindow2 = (userId)=>{
     let html = `
-        <video id = "video:${userId}" class="firstVideo" muted="muted" width="600" height="500" autoplay></video>
+        <div class="videoWindowMain firstVideo">
+        <div class="videoWindowWarpp">
+            <video id = "video:${userId}" class="videoMainWindow" muted="muted" width="600" height="500" autoplay></video>
+        </div>
+        <div class="videoWindowNameWarpp">
+            <span class="videoWindowName">userName</span>
+        </div>
+        </div>
     `
     return html
 }

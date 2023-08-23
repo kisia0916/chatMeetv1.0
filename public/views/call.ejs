@@ -6,21 +6,57 @@
     <title>Document</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link rel="stylesheet" href="/public/style/call.css">
+    <script>
+        $(function() {
+            $('body').outerHeight($(window).height());
+        });
+        $(window).on('resize',function(){
+            winH = $(window).height();
+            $('body').outerHeight(winH);
+        });
+        </script>
 </head>
 <body>
     <script>
         let Socket = io()
     </script>
 
-    <span id="userId"><%=userId%></span>
-    <span id="roomId"><%=roomId%></span>
-    <span id="flg"><%=flg%></span>
-    <h1>call</h1>
-    <div id="audioWindowsWaerpp"></div>
-    <div id="videoWindowsWarpp">
+    <span id="userId" style="display: none;"><%=userId%></span>
+    <span id="roomId" style="display: none;"><%=roomId%></span>
+    <span id="flg" style="display: none;"><%=flg%></span>
+
+    <div class="audioWindowsWaerpp"></div>
+
+    <div class="roomTop">
+        <span class="roomTopText">SeccampMeet 2023</span>
     </div>
-    <button onclick="camChange()">cam</button>
-    <button onclick="changeMike()">cam</button>
+    <div class="roomCenter">
+        <div class="roomCenterMain">
+
+
+
+        </div>
+    </div>
+    <div class="roomBottom">
+        <div class="roomButtonS">
+            <div class="camChangeButtonWarpp">
+                <button class="camChangeButton"><i class="ri-vidicon-fill meetPageCamIcon"></i><span class="camChangeText">ON</span></button>
+            </div>
+            <div class="mikeChangeButtonWarpp">
+                <button class="mikeChangeButton"><i class="ri-mic-fill meetPageMikeIcon"></i><span class="mikeChangeText">ON</span></button>
+            </div>
+            <div class="lateRoomButtonWarpp">
+                <button class="lateRoomButton"><span class="lateRoomText">退室</span></button>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <script src="/public/src/callPage/call.js"></script>
     <script src="/public/src/callPage/p2p.js"></script>

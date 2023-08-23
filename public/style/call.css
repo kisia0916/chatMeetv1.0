@@ -1,0 +1,280 @@
+body{
+    margin: 0;
+    background-color: #282a36;
+    font-family: 'Kanit', sans-serif;
+    overflow-y: hidden;
+    height: 100%;
+}
+.roomTop{
+    width: 100%;
+    height: 65px;
+    background-color: #1f222a;
+    display: flex;
+}
+.roomTopText{
+    font-size: 170%;
+    color: white;
+    font-weight: bolder;
+    margin: auto;
+}
+.roomCenter{
+    height: calc(100% - 70px - 68px);
+    width: 100%;
+    display: flex;
+}
+.roomBottom{
+    height: 70px;
+    width: 100%;
+    display: flex;
+    background-color: #383b4b;
+}
+.roomButtonS{
+    display: flex;
+    margin: auto;
+}
+.camChangeButton{
+    width: 107px;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 9px;
+    border: none;
+    display: flex;
+    background-color: #1d1f27;
+}
+.mikeChangeButton{
+    width: 107px;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 9px;
+    border: none;
+    display: flex;
+    background-color: #1d1f27;
+
+}
+.lateRoomButton{
+    width: 107px;
+    height: 39px;
+    border-radius: 9px;
+    border: none;
+    background-color: #ff3838;
+    border: solid 2px rgb(255, 34, 34);
+}
+@media(max-width:500px){
+    .camChangeButton{
+        margin-right: 12px;
+    }
+    .mikeChangeButton{
+        margin-right: 12px;
+    }
+    .lateRoomButton{
+    }
+}
+.meetPageCamIcon{
+    color: white;
+    font-size: 190%;
+    margin-top: 6px;
+    margin-left: 12px;
+}
+.camChangeText{
+    color: #50FA7B;
+    font-size: 150%;
+    margin-top: 7px;
+    margin-left: 9px;
+}
+.mikeChangeText{
+    color: #50FA7B;
+    font-size: 150%;
+    margin-top: 7px;
+    margin-left: 9px;
+}
+.meetPageMikeIcon{
+    color: white;
+    font-size: 170%;
+    margin-top: 7px;
+    margin-left: 12px;
+}
+.lateRoomText{
+    font-size: 140%;
+    font-weight: bolder;
+    color: white;
+}
+.roomCenter{
+    display: flex;
+}
+.roomCenterMain{
+    /* overflow-x: scroll; */
+    /* margin-left: 5px; */
+    margin: auto;
+}
+.videoWindowMain{
+    
+
+}
+.videoWindowWarpp{
+
+
+    background-color: red;
+    display: flex;
+    margin: auto;
+
+    /* margin-top: 10%; */
+}
+.videoWindowNameWarpp{
+    width: 100%;
+    display: flex;
+}
+.videoWindowName{
+    color: white;
+    display: flex;
+    margin: auto;
+}
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+    margin-bottom:130px;
+    }
+    ::-webkit-scrollbar-track {
+    background-color: rgba(116, 162, 200, 0.3);
+    /* border-radius: 80px; */
+    }
+    ::-webkit-scrollbar-thumb {
+    background: #666f87;
+    border-radius: 10px;
+    width: 130px;
+    }
+    @media(max-width:444px){
+        .roomCenterMain{
+            /* overflow-x: scroll; */
+            /* margin-left: 5px; */
+            width: 100%;
+        }
+        .videoWindowMain{
+            width: 100%;
+        }
+        .videoWindowWarpp{
+            width: 320px;
+            height:208px;
+            background-color: #50FA7B;
+        }
+        .roomTop{
+            margin-bottom: 15px;
+        }
+        .roomCenter{
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        .videoWindowNameWarpp{
+            margin-top: 1px;
+            margin-bottom: 5px;
+        }
+        .videoWindowName{
+            font-size: 140%;
+    
+        }
+        .videoWindowMain{
+
+        }
+        .roomButtonS{
+            margin-top: 10px;
+        }
+    }
+    @media(max-width:445px) and  (min-width:381px){
+        .roomCenterMain{
+            /* overflow-x: scroll; */
+            /* margin-left: 5px; */
+            width: 100%;
+        }
+        .videoWindowMain{
+            width: 100%;
+        }
+        .videoWindowWarpp{
+            width: 350px;
+            height:228px;
+            background-color: blue;
+        }
+        .roomTop{
+            margin-bottom: 15px;
+        }
+        .roomCenter{
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        .videoWindowNameWarpp{
+            margin-top: 1px;
+            margin-bottom: 5px;
+        }
+        .videoWindowName{
+            font-size: 140%;
+    
+        }
+        .videoWindowMain{
+
+        }
+        .roomButtonS{
+            margin-top: 10px;
+        }
+    }
+@media(max-width:630px) and (min-width:446px){
+    .roomCenterMain{
+        /* overflow-x: scroll; */
+        /* margin-left: 5px; */
+    }
+    .videoWindowWarpp{
+        width: 400px;
+        height:260px;
+    }
+    .roomTop{
+        margin-bottom: 15px;
+    }
+    .roomCenter{
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .videoWindowNameWarpp{
+        margin-top: 1px;
+        margin-bottom: 5px;
+    }
+    .videoWindowName{
+        font-size: 140%;
+
+    }
+    .videoWindowMain{
+        margin-left: 17px;
+        margin-right: 17px;
+    }
+    .roomButtonS{
+        margin-top: 10px;
+    }
+}
+@media(min-width:631px){
+    .roomCenterMain{
+        /* overflow-x: scroll; */
+        /* margin-left: 5px; */
+        display: flex;
+    }
+    .videoWindowWarpp{
+        width: 600px;
+        height: 500px;
+    }
+    .roomCenter{
+        overflow-y: hidden;
+        overflow-x: scroll;
+        display: flex;
+    }
+    .videoWindowNameWarpp{
+        margin-top: 10px;
+    }
+    .videoWindowName{
+        font-size: 160%;
+        
+    }
+    .videoWindowMain{
+        margin-left: 17px;
+        margin-right: 17px;
+    }
+}
+.videoMainWindow{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
