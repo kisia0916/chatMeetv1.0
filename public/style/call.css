@@ -160,7 +160,7 @@ body{
             margin-bottom: 15px;
         }
         .roomCenter{
-            overflow-y: scroll;
+            overflow-y: auto;
             overflow-x: hidden;
         }
         .videoWindowNameWarpp{
@@ -196,7 +196,7 @@ body{
             margin-bottom: 15px;
         }
         .roomCenter{
-            overflow-y: scroll;
+            overflow-y: auto;
             overflow-x: hidden;
         }
         .videoWindowNameWarpp{
@@ -227,7 +227,7 @@ body{
         margin-bottom: 15px;
     }
     .roomCenter{
-        overflow-y: scroll;
+        overflow-y: auto;
         overflow-x: hidden;
     }
     .videoWindowNameWarpp{
@@ -258,7 +258,7 @@ body{
     }
     .roomCenter{
         overflow-y: hidden;
-        overflow-x: scroll;
+        overflow-x: auto;
         display: flex;
     }
     .videoWindowNameWarpp{
