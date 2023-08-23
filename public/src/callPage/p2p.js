@@ -61,9 +61,13 @@ Socket.on("setUserNew",async(data)=>{
     userList = data.userList
     unshiftList(userList)
     let videoWarpp = document.querySelector(".roomCenterMain")
+    let audioSpace = document.querySelector(".audioWindowsWaerpp")
+
     // let audioWarpp = document.getElementById("audioWindowsWaerpp")
     // audioWarpp.innerHTML = audioDoms(userList,p2pID)
     videoWarpp.innerHTML = videoWindow(userList,p2pID)
+    audioSpace.innerHTML = myAudioDom()      
+
     if(userList.length-1>0){
         console.log("eee")
         console.log("2")

@@ -4,7 +4,7 @@ const audioDoms = (userList,userId)=>{
         if(i.userId == userId){
             if(index == 0){
                 return`
-                    <audio id="myAudio" class="firstAudio" controls disablecontrols></audio>
+                    <audio id="myAudio" class="firstAudio" controls disablecontrols autoplay></audio>
                 `
             }else{
                 return`
@@ -15,12 +15,12 @@ const audioDoms = (userList,userId)=>{
         }else{
             if(index == 0){
                 return`
-                    <audio id="audio:${i.userId}" class="firstAudio" controls disablecontrols></audio>
+                    <audio id="audio:${i.userId}" class="firstAudio" controls disablecontrols autoplay></audio>
 
                 `
             }else{
                 return`
-                    <audio id="audio:${i.userId}" controls disablecontrols></audio>
+                    <audio id="audio:${i.userId}" controls disablecontrols autoplay></audio>
                 `
             }
         }
@@ -29,7 +29,13 @@ const audioDoms = (userList,userId)=>{
 }
 const audioDoms2 = (userId)=>{
     let html = `
-        <audio id="audio:${userId}" class="firstAudio" controls disablecontrols></audio>
+        <audio id="audio:${userId}" class="firstAudio" controls disablecontrols autoplay></audio>
+    `
+    return html
+}
+const myAudioDom = ()=>{
+    let html = `
+        <audio id="myAudio" class="firstAudio" controls disablecontrols autoplay></audio>
     `
     return html
 }

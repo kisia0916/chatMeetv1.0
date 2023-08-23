@@ -1,3 +1,4 @@
+
 let userId = document.getElementById("userId").textContent
 let roomId = document.getElementById("roomId").textContent
 let flg = document.getElementById("flg").textContent
@@ -33,18 +34,24 @@ const caminit = (firstFlg)=>{
     })
 }
 
-const audioInit = (flg)=>{
+const audioInit =(flg)=>{
+    let co = 0
     if(mikeFlg){
         navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(function(stream) {
+        .then(async function(stream) {
             mikeStream = stream
             const mediaRecorder = new MediaRecorder(mikeStream);
-            const audioElement = document.createElement('audio');
-            audioElement.controls = true;
-            audioElement.id = "myAudio"
-            audioElement.srcObject = mikeStream; // Blobではなく直接ストリームを設定
-            document.body.appendChild(audioElement);
-            audioElement.play()
+            // const audioElement = document.createElement('audio');
+            // audioElement.controls = true;
+            // audioElement.id = "myAudio"
+            // audioElement.srcObject = mikeStream; // Blobではなく直接ストリームを設定
+            // document.body.appendChild(audioElement);
+            // audioElement.play()
+            // let audioSpace = document.querySelector(".audioWindowsWaerpp")
+
+            let myAudio = document.getElementById("myAudio") 
+            myAudio.srcObject = mikeStream
+            myAudio.play()
             mediaRecorder.ondataavailable = function(event) {
             if (event.data.size > 0) {
                 // 録音データの処理
