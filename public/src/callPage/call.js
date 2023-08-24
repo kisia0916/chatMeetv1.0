@@ -147,7 +147,9 @@ const changeAudios = ()=>{
             console.log(1)
             console.log(i)
             let tag = document.getElementById(i)
-            tag.muted = true
+            if(tag){
+                tag.muted = true
+            }
             let audioIcon = document.querySelector(".audioIcon")
             let audioIcon2 = document.querySelector(".audioIcon2")
             console.log(audioIcon)
@@ -161,7 +163,9 @@ const changeAudios = ()=>{
             console.log(2)
             console.log(i)
             let tag = document.getElementById(i)
-            tag.muted = false
+            if(tag){
+                tag.muted = false
+            }
             let audioIcon = document.querySelector(".audioIcon")
             let audioIcon2 = document.querySelector(".audioIcon2")
             console.log(audioIcon)
