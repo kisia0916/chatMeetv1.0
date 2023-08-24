@@ -4,7 +4,7 @@ const audioDoms = (userList,userId)=>{
         if(i.userId == userId){
             if(index == 0){
                 return`
-                    <audio id="myAudio" class="firstAudio" controls disablecontrols autoplay></audio>
+                    <audio id="myAudio" class="firstAudio"  autoplay></audio>
                 `
             }else{
                 return`
