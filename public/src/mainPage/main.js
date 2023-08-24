@@ -5,7 +5,7 @@ Socket.emit("createdSocketConnection",{userId:userId,page:"/main"})
 
 const initPage = (roomList)=>{
     let listWarpp = document.querySelector(".publicRoomList")
-    listWarpp.innerHTML = roomListDom(roomList)
+    listWarpp.innerHTML = roomListDom(roomList.reverse())
 }
 const moveCreatet = ()=>{
     location.href = "/mkcall"
