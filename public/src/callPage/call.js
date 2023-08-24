@@ -144,6 +144,7 @@ const camChange = ()=>{
 const changeAudios = ()=>{
     if(headFlg){
         audioList.forEach((i)=>{
+            console.log(1)
             console.log(i)
             let tag = document.getElementById(i)
             tag.muted = true
@@ -158,6 +159,7 @@ const changeAudios = ()=>{
     }else{
         audioList.forEach((i)=>{
             console.log(2)
+            console.log(i)
             let tag = document.getElementById(i)
             tag.muted = false
             let audioIcon = document.querySelector(".audioIcon")
