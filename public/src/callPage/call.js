@@ -143,7 +143,7 @@ const camChange = ()=>{
 }
 const changeAudios = ()=>{
     if(headFlg){
-        audioList.forEach((i)=>{
+        audioTagList.forEach((i)=>{
             console.log(1)
             console.log(i)
             let tag = document.getElementById(i)
@@ -157,7 +157,7 @@ const changeAudios = ()=>{
             headFlg = false
         })
     }else{
-        audioList.forEach((i)=>{
+        audioTagList.forEach((i)=>{
             console.log(2)
             console.log(i)
             let tag = document.getElementById(i)
