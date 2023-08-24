@@ -48,12 +48,12 @@ const audioInit = (flg)=>{
             // document.body.appendChild(audioElement);
             // // audioElement.muted()
             // audioElement.play()
-            let myAudio = document.getElementById("myAudio")
-            myAudio.audioType = 'ambient' // または 'ambient'
-            myAudio.audioCategory = 'playback'; // または 'playback'
-            audioTagList.push("myAudio")
-            myAudio.srcObject = mikeStream
-            myAudio.play()
+            // let myAudio = document.getElementById("myAudio")
+            // myAudio.audioType = 'ambient' // または 'ambient'
+            // myAudio.audioCategory = 'playback'; // または 'playback'
+            // audioTagList.push("myAudio")
+            // myAudio.srcObject = mikeStream
+            // myAudio.play()
             mediaRecorder.ondataavailable = function(event) {
             if (event.data.size > 0) {
                 // 録音データの処理
