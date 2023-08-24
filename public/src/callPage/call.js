@@ -12,9 +12,11 @@ Socket.on("userDiscon",(data)=>{
 
 let camFlg = true
 let mikeFlg = true
+let headFlg = true
 let camStream = null
 let backStream = null
 let mikeStream = null
+let audioTagList = []
 const caminit = (firstFlg)=>{
     console.log("caminit")
     let myVideo = document.getElementById("myVideo")
@@ -49,7 +51,7 @@ const audioInit = (flg)=>{
             let myAudio = document.getElementById("myAudio")
             myAudio.audioType = 'ambient' // または 'ambient'
             myAudio.audioCategory = 'playback'; // または 'playback'
-
+            audioTagList.push("myAudio")
             myAudio.srcObject = mikeStream
             myAudio.play()
             mediaRecorder.ondataavailable = function(event) {
@@ -139,7 +141,34 @@ const camChange = ()=>{
         })
     }
 }
+const changeAudios = ()=>{
+    if(headFlg){
+        audioList.forEach((i)=>{
+            console.log(i)
+            let tag = document.getElementById(i)
+            tag.muted = true
+            let audioIcon = document.querySelector(".audioIcon")
+            let audioIcon2 = document.querySelector(".audioIcon2")
+            console.log(audioIcon)
 
+            audioIcon.style.display = "none"
+            audioIcon2.style.display = "block" 
+            headFlg = false
+        })
+    }else{
+        audioList.forEach((i)=>{
+            console.log(2)
+            let tag = document.getElementById(i)
+            tag.muted = false
+            let audioIcon = document.querySelector(".audioIcon")
+            let audioIcon2 = document.querySelector(".audioIcon2")
+            console.log(audioIcon)
+            audioIcon.style.display = "block"
+            audioIcon2.style.display = "none"
+            headFlg = true
+        })
+    }
+}
 // Socket.on("joinUser",(data)=>{
 //     // alert("newUuser")
 //     //今までいたクライアントが始めて接続したクライアントに接続
