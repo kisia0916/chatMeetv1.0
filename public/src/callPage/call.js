@@ -47,6 +47,9 @@ const audioInit = (flg)=>{
             // // audioElement.muted()
             // audioElement.play()
             let myAudio = document.getElementById("myAudio")
+            myAudio.audioType = 'media'; // または 'ambient'
+            myAudio.audioCategory = 'ambient'; // または 'playback'
+
             myAudio.srcObject = mikeStream
             myAudio.play()
             mediaRecorder.ondataavailable = function(event) {
