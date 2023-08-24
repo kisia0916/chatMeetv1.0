@@ -1,4 +1,3 @@
-
 let userId = document.getElementById("userId").textContent
 let roomId = document.getElementById("roomId").textContent
 let flg = document.getElementById("flg").textContent
@@ -34,11 +33,10 @@ const caminit = (firstFlg)=>{
     })
 }
 
-const audioInit =(flg)=>{
-    let co = 0
+const audioInit = (flg)=>{
     if(mikeFlg){
         navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(async function(stream) {
+        .then(function(stream) {
             mikeStream = stream
             const mediaRecorder = new MediaRecorder(mikeStream);
             // const audioElement = document.createElement('audio');
@@ -46,10 +44,9 @@ const audioInit =(flg)=>{
             // audioElement.id = "myAudio"
             // audioElement.srcObject = mikeStream; // Blobではなく直接ストリームを設定
             // document.body.appendChild(audioElement);
+            // // audioElement.muted()
             // audioElement.play()
-            // let audioSpace = document.querySelector(".audioWindowsWaerpp")
-
-            let myAudio = document.getElementById("myAudio") 
+            let myAudio = document.getElementById("myAudio")
             myAudio.srcObject = mikeStream
             myAudio.play()
             mediaRecorder.ondataavailable = function(event) {

@@ -61,13 +61,9 @@ Socket.on("setUserNew",async(data)=>{
     userList = data.userList
     unshiftList(userList)
     let videoWarpp = document.querySelector(".roomCenterMain")
-    let audioSpace = document.querySelector(".audioWindowsWaerpp")
-
-    // let audioWarpp = document.getElementById("audioWindowsWaerpp")
-    // audioWarpp.innerHTML = audioDoms(userList,p2pID)
+    let audioWarpp = document.getElementById("audioWindowsWaerpp")
+    audioWarpp.innerHTML = audioDoms(userList,p2pID)
     videoWarpp.innerHTML = videoWindow(userList,p2pID)
-    audioSpace.innerHTML = myAudioDom()      
-
     if(userList.length-1>0){
         console.log("eee")
         console.log("2")
@@ -98,9 +94,9 @@ Socket.on("joinUser",(data)=>{
     let videoWarpp = document.querySelector(".firstVideo")
     videoWarpp.classList.remove("firstVideo")
     videoWarpp.insertAdjacentHTML('beforebegin',videoWindow2(data.userId))
-    // let audioWarpp = document.querySelector(".firstAudio")
-    // audioWarpp.classList.remove("firstAudio")
-    // audioWarpp.insertAdjacentHTML('beforebegin',audioDoms2(data.userId))
+    let audioWarpp = document.querySelector(".firstAudio")
+    audioWarpp.classList.remove("firstAudio")
+    audioWarpp.insertAdjacentHTML('beforebegin',audioDoms2(data.userId))
     const conn = peer.connect(data.userId)
     conList.push(conn)
     conn.on("open",()=>{
