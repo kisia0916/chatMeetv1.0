@@ -398,6 +398,18 @@ body{
 
 
     }
+    .roomCenter{
+        height: calc(100% - 70px - 63px);
+        width: 100%;
+        display: flex;
+    }
+    .roomBottom{
+        bottom: 0;
+        height: 70px;
+        width: 100%;
+        display: flex;
+        background-color: #383b4b;
+    }
 }
 .videoMainWindow{
     width: 100%;
