@@ -159,8 +159,8 @@ body{
             background-color: #434653;
 
         }
-        .roomTop{
-            margin-bottom: 15px;
+        .firstVideo{
+            margin-bottom: 10px;
         }
         .roomCenter{
             overflow-y: auto;
@@ -226,8 +226,8 @@ body{
             background-color: #434653;
 
         }
-        .roomTop{
-            margin-bottom: 15px;
+        .firstVideo{
+            margin-bottom: 10px;
         }
         .roomCenter{
             overflow-y: auto;
@@ -290,8 +290,8 @@ body{
         width: 400px;
         height:260px;
     }
-    .roomTop{
-        margin-bottom: 15px;
+    .firstVideo{
+        margin-bottom: 10px;
     }
     .roomCenter{
         overflow-y: auto;
