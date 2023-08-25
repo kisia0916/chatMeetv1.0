@@ -195,14 +195,16 @@ body{
             width: 44px;
             height: 44px;
             border-radius: 10px;
-            background-color: rgba(255, 255, 104, 0.861);
+            background-color: #4b4f64c7;
+
 
         }
         .LinkCoPyButton{
             width: 44px;
             height: 44px;
             border-radius: 10px;
-            background-color: rgba(255, 255, 104, 0.861);
+            background-color: #4b4f64c7;
+
 
 
 
@@ -262,7 +264,8 @@ body{
             width: 44px;
             height: 44px;
             border-radius: 10px;
-            background-color: rgba(255, 255, 104, 0.861);
+            background-color: #4b4f64c7;
+
 
 
         }
@@ -270,7 +273,8 @@ body{
             width: 44px;
             height: 44px;
             border-radius: 10px;
-            background-color: rgba(255, 255, 104, 0.861);
+            background-color: #4b4f64c7;
+
 
 
         }
@@ -321,7 +325,8 @@ body{
         width: 47px;
         height: 47px;
         border-radius: 10px;
-        background-color: rgba(255, 255, 104, 0.861);
+        background-color: #4b4f64c7;
+
 
 
     }
@@ -329,7 +334,8 @@ body{
         width: 47px;
         height: 47px;
         border-radius: 10px;
-        background-color: rgba(255, 255, 104, 0.861);
+        background-color: #4b4f64c7;
+
 
 
     }
@@ -376,7 +382,7 @@ body{
         width: 50px;
         height: 50px;
         border-radius: 10px;
-        background-color: rgb(255, 255, 104);
+        background-color: #4b4f64c7;
 
 
     }
@@ -384,7 +390,8 @@ body{
         width: 50px;
         height: 50px;
         border-radius: 10px;
-        background-color: rgb(255, 255, 104);
+        background-color: #4b4f64c7;
+
 
 
     }
@@ -419,6 +426,7 @@ body{
       border: none;
       border-radius: 10px;
       display: flex;
+      color: rgb(255, 255, 104);
       /* display: flex; */
       /* background-color: rgba(0, 0, 255, 0.704); */
   }
@@ -426,5 +434,7 @@ body{
       border: none;
       display: flex;
       border-radius: 10px;
+      color: rgb(255, 255, 104);
+
       /* background-color: rgba(0, 0, 255, 0.704); */
   }
