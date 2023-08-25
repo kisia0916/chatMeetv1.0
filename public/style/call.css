@@ -160,7 +160,7 @@ body{
 
         }
         .firstVideo{
-            margin-bottom: 10px;
+            margin-top: 10px;
         }
         .roomCenter{
             overflow-y: auto;
@@ -227,7 +227,7 @@ body{
 
         }
         .firstVideo{
-            margin-bottom: 10px;
+            margin-top: 10px;
         }
         .roomCenter{
             overflow-y: auto;
@@ -291,7 +291,7 @@ body{
         height:260px;
     }
     .firstVideo{
-        margin-bottom: 10px;
+        margin-top: 10px;
     }
     .roomCenter{
         overflow-y: auto;
