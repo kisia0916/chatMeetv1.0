@@ -115,10 +115,10 @@ body{
 .videoWindowWarpp{
 
 
-    background-color: red;
+    background-color: #434653;
     display: flex;
     margin: auto;
-
+    border-radius: 4px;
     /* margin-top: 10%; */
 }
 .videoWindowNameWarpp{
@@ -156,7 +156,8 @@ body{
         .videoWindowWarpp{
             width: 320px;
             height:208px;
-            background-color: #50FA7B;
+            background-color: #434653;
+
         }
         .roomTop{
             margin-bottom: 15px;
@@ -222,7 +223,8 @@ body{
         .videoWindowWarpp{
             width: 350px;
             height:228px;
-            background-color: blue;
+            background-color: #434653;
+
         }
         .roomTop{
             margin-bottom: 15px;
@@ -427,6 +429,7 @@ body{
       border-radius: 10px;
       display: flex;
       color: rgb(255, 255, 104);
+      cursor: pointer;
       /* display: flex; */
       /* background-color: rgba(0, 0, 255, 0.704); */
   }
@@ -435,6 +438,6 @@ body{
       display: flex;
       border-radius: 10px;
       color: rgb(255, 255, 104);
-
+      cursor: pointer;
       /* background-color: rgba(0, 0, 255, 0.704); */
   }
