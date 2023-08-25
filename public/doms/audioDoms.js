@@ -32,9 +32,16 @@ const audioDoms = (userList,userId)=>{
     return html
 }
 const audioDoms2 = (userId)=>{
-    let html = `
-        <audio id="audio:${userId}" class="firstAudio" controls disablecontrols autoplay audioType = 'ambient' audioCategory = 'playback' style="display:none;"></audio>
+    let html = null
+    if(headFlg){
+        html = `
+            <audio id="audio:${userId}" class="firstAudio" controls disablecontrols autoplay audioType = 'ambient' audioCategory = 'playback' style="display:none;"></audio>
+        `
+    }else{
+        html = `
+        <audio id="audio:${userId}" class="firstAudio" controls disablecontrols autoplay audioType = 'ambient' audioCategory = 'playback' muted style="display:none;"></audio>
     `
+    }
     audioTagList.push(`audio:${userId}`)
     return html
 }
