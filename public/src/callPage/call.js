@@ -120,6 +120,7 @@ const camChange = ()=>{
     if(camFlg){
         camFlg = false
         peerList = []
+        Socket.emit("camState",{userId:p2pID,flg:true})
         const tracks = myVideo.srcObject.getTracks();
         tracks.forEach(track => {
         track.stop();
@@ -128,6 +129,7 @@ const camChange = ()=>{
         camStream = null
     }else{
         camFlg = true
+        Socket.emit("camState",{userId:p2pID,flg:false})
         navigator.mediaDevices.getUserMedia({video : camFlg})
         .then((stream)=>{
             camStream = stream

@@ -193,6 +193,15 @@ io.on("connection",(socket)=>{
             }
         })
     })
+    socket.on("camState",(data)=>{
+        let userId = data.userId
+        let camDom = document.getElementById("video:"+userId)
+        if(data.flg){
+            camDom.style.display = "none"
+        }else{
+            camDom.style.display = "block"
+        }
+    })
     socket.on("disconnect",()=>{
         userList.forEach((i,index)=>{
             if(i.userId == userId){
