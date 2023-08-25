@@ -20,12 +20,13 @@ body{
     margin: auto;
 }
 .roomCenter{
-    height: calc(100% - 70px - 63px);
+    height: calc(100% - 60px - 63px);
     width: 100%;
     display: flex;
 }
 .roomBottom{
-    height: 70px;
+    bottom: 0;
+    height: 60px;
     width: 100%;
     display: flex;
     background-color: #383b4b;
@@ -178,7 +179,7 @@ body{
 
         }
         .roomButtonS{
-            margin-top: 7px;
+            margin-top: 8px;
 
         }
         .posionButtons{
@@ -245,7 +246,7 @@ body{
 
         }
         .roomButtonS{
-            margin-top: 7px;
+            margin-top: 8px;
 
         }
         .posionButtons{
@@ -310,7 +311,7 @@ body{
         margin-right: 17px;
     }
     .roomButtonS{
-        margin-top: 7px;
+        margin-top: 8px;
     }
     .posionButtons{
         position:absolute;
