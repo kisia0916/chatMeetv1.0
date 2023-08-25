@@ -78,6 +78,11 @@ const audioInit = (flg)=>{
 const changeMike = ()=>{
     if(mikeFlg){
         mikeFlg = false
+        let mikeButton = document.querySelector(".mikeChangeText")
+        if(mikeButton){
+            mikeButton.textContent = "OFF"
+            mikeButton.style.color = "#ff3838"
+        }
         let tracks = mikeStream.getTracks()
         tracks.forEach((i)=>{
             i.stop()
@@ -85,6 +90,11 @@ const changeMike = ()=>{
         mikeStream = null
     }else{
         mikeFlg = true
+        let mikeButton = document.querySelector(".mikeChangeText")
+        if(mikeButton){
+            mikeButton.textContent = "ON"
+            mikeButton.style.color = "#50FA7B"
+        }
         navigator.mediaDevices.getUserMedia({ audio: mikeFlg })
         .then(function(stream) {
             mikeStream = stream
@@ -120,7 +130,13 @@ const camChange = ()=>{
     if(camFlg){
         camFlg = false
         peerList = []
-        Socket.emit("camState",{userId:p2pID,flg:true})
+        let camButton = document.querySelector(".camChangeText")
+
+        Socket.emit("camState",{userId:p2pID,roomId:roomId,flg:true})
+        if(camButton){
+            camButton.textContent = "OFF"
+            camButton.style.color = "#ff3838"
+        }
         const tracks = myVideo.srcObject.getTracks();
         tracks.forEach(track => {
         track.stop();
@@ -129,7 +145,13 @@ const camChange = ()=>{
         camStream = null
     }else{
         camFlg = true
-        Socket.emit("camState",{userId:p2pID,flg:false})
+        let camButton = document.querySelector(".camChangeText")
+
+        Socket.emit("camState",{userId:p2pID,roomId:roomId,flg:false})
+        if(camButton){
+            camButton.textContent = "ON"
+            camButton.style.color = "#50FA7B"
+        }
         navigator.mediaDevices.getUserMedia({video : camFlg})
         .then((stream)=>{
             camStream = stream
@@ -178,6 +200,17 @@ const changeAudios = ()=>{
         })
     }
 }
+Socket.on("camState",(data)=>{
+    let audioDom = document.getElementById("video:"+data.userId)
+    console.log("camState")
+    if(audioDom){
+        if(data.flg){
+            audioDom.style.display = "none"
+        }else{
+            audioDom.style.display = "block"
+        }
+    }
+})
 // Socket.on("joinUser",(data)=>{
 //     // alert("newUuser")
 //     //今までいたクライアントが始めて接続したクライアントに接続

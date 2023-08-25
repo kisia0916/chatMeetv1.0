@@ -195,12 +195,15 @@ io.on("connection",(socket)=>{
     })
     socket.on("camState",(data)=>{
         let userId = data.userId
-        let camDom = document.getElementById("video:"+userId)
+        let roomId = data.roomId
         if(data.flg){
-            camDom.style.display = "none"
+            io.to(roomId).emit("camState",{userId:data.userId,flg:true})
         }else{
-            camDom.style.display = "block"
+            io.to(roomId).emit("camState",{userId:data.userId,flg:false})
         }
+    })
+    socket.on("mikeState",(data)=>{
+        
     })
     socket.on("disconnect",()=>{
         userList.forEach((i,index)=>{
