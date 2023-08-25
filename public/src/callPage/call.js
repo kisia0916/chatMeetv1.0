@@ -89,10 +89,10 @@ const changeMike = ()=>{
         .then(function(stream) {
             mikeStream = stream
             const mediaRecorder = new MediaRecorder(mikeStream);
-            const audioElement = document.getElementById("myAudio")
-            audioElement.controls = true;
-            audioElement.srcObject = mikeStream; // Blobではなく直接ストリームを設 
-            audioElement.play()       
+            // const audioElement = document.getElementById("myAudio")
+            // audioElement.controls = true;
+            // audioElement.srcObject = mikeStream; // Blobではなく直接ストリームを設 
+            // audioElement.play()       
             mediaRecorder.ondataavailable = function(event) {
             if (event.data.size > 0) {
                 // 録音データの処理
@@ -116,6 +116,7 @@ const changeMike = ()=>{
 
 const camChange = ()=>{
     let myVideo = document.getElementById("myVideo")
+
     if(camFlg){
         camFlg = false
         peerList = []

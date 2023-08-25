@@ -41,6 +41,7 @@ body{
     margin-right: 15px;
     border-radius: 9px;
     border: none;
+    cursor: pointer;
     display: flex;
     background-color: #1d1f27;
 }
@@ -51,6 +52,7 @@ body{
     border-radius: 9px;
     border: none;
     display: flex;
+    cursor: pointer;
     background-color: #1d1f27;
 
 }
