@@ -61,6 +61,7 @@ body{
     height: 39px;
     border-radius: 9px;
     border: none;
+    cursor: pointer;
     background-color: #ff3838;
     border: solid 2px rgb(255, 34, 34);
 }

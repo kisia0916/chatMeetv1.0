@@ -200,6 +200,9 @@ const changeAudios = ()=>{
         })
     }
 }
+const moveMeet = ()=>{
+    location.href = "/main"
+}
 Socket.on("camState",(data)=>{
     let audioDom = document.getElementById("video:"+data.userId)
     console.log("camState")

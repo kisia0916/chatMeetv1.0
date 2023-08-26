@@ -32,7 +32,7 @@
     <div id="audioWindowsWaerpp" style="display: none;"></div>
 
     <div class="roomTop">
-        <span class="roomTopText">SeccampMeet 2023</span>
+        <span class="roomTopText"><%=roomName%></span>
     </div>
     <div class="roomCenter">
         <div class="posionButtons">
@@ -68,7 +68,7 @@
                 <button class="mikeChangeButton" onclick="changeMike()"><i class="ri-mic-fill meetPageMikeIcon"></i><span class="mikeChangeText">ON</span></button>
             </div>
             <div class="lateRoomButtonWarpp">
-                <button class="lateRoomButton"><span class="lateRoomText">退室</span></button>
+                <button class="lateRoomButton" onclick="moveMeet()"><span class="lateRoomText">退室</span></button>
             </div>
         </div>
     </div>

@@ -71,6 +71,11 @@ app.get("/mkcall",(req,res)=>{
 app.get("/call/:id",(req,res)=>{
     let roomId = req.params.id
     let co = 0
+    let roomName = roomList.map((i)=>{
+        if(i.roomId == roomId){
+            return i.roomName
+        }
+    })
     roomList.forEach((i)=>{
         if(i.roomId == roomId){
             co+=1
@@ -82,7 +87,8 @@ app.get("/call/:id",(req,res)=>{
             let renderPage = ejs.render(callPage,{
                 userId:req.session.userId,
                 roomId:roomId,
-                flg:false
+                flg:false,
+                roomName:roomName
             })
             res.writeHead(200,{"Content-Type":"text/html"})
             res.write(renderPage)
