@@ -40,10 +40,10 @@ a{
 
 .pageTitle{
     font-family: 'Kanit', sans-serif;
-    font-size: 220%;
+    font-size: 230%;
     color: #56fd80;;
     margin-top: 10px;
-    font-weight: bolder;
+    /* font-weight: bolder; */
     display: flex;
     margin: auto;
     width: 100%;
