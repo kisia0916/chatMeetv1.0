@@ -92,10 +92,14 @@ Socket.on("setUserNew",async(data)=>{
 Socket.on("joinUser",(data)=>{
     userList.push(data.listData)
     let videoWarpp = document.querySelector(".firstVideo")
-    videoWarpp.classList.remove("firstVideo")
-    videoWarpp.insertAdjacentHTML('beforebegin',videoWindow2(data.userId))
+    try{
+        videoWarpp.classList.remove("firstVideo")
+    }catch{}
+    videoWarpp.insertAdjacentHTML('beforebegin',videoWindow2(data.userId,data.listData.name))
     let audioWarpp = document.querySelector(".firstAudio")
-    audioWarpp.classList.remove("firstAudio")
+    try{
+        audioWarpp.classList.remove("firstAudio")
+    }catch{}
     audioWarpp.insertAdjacentHTML('beforebegin',audioDoms2(data.userId))
     const conn = peer.connect(data.userId)
     conList.push(conn)

@@ -15,6 +15,7 @@ const mainPage = fs.readFileSync("./public/views/main.ejs","utf-8")
 const callPage = fs.readFileSync("./public/views/call.ejs","utf-8")
 const createPage = fs.readFileSync("./public/views/createRoom.ejs","utf-8")
 const catchPage = fs.readFileSync("./public/views/catchPage.ejs","utf-8")
+const joinPage = fs.readFileSync("./public/views/join.ejs","utf-8")
 
 const createData = require("./backSrc/createData")
 
@@ -68,48 +69,99 @@ app.get("/mkcall",(req,res)=>{
     res.write(renderPage)
     res.end()
 })
-app.get("/call/:id",(req,res)=>{
-    let roomId = req.params.id
-    let co = 0
-    let roomName = roomList.map((i)=>{
-        if(i.roomId == roomId){
-            return i.roomName
-        }
-    })
+app.get("/join/:id",(req,res)=>{
+    let roomFlg = false
     roomList.forEach((i)=>{
-        if(i.roomId == roomId){
-            co+=1
+        if(i.roomId == req.params.id){
+            roomFlg = true
         }
     })
-    if(co != 0){
-        console.log("a")
-        if(req.session.userId){
-            let renderPage = ejs.render(callPage,{
-                userId:req.session.userId,
-                roomId:roomId,
-                flg:false,
-                roomName:roomName
-            })
-            res.writeHead(200,{"Content-Type":"text/html"})
-            res.write(renderPage)
-            res.end()
-        }else{
+    if(roomFlg){
+        let roomId = req.params.id
+        let userId = ""
+        let roomName;
+        roomList.forEach((i)=>{
+            if(i.roomId == roomId){
+                roomName = i.roomName
+            }
+        })
+        if(!req.session.userId){
             req.session.userId = uuidv4()
-            let renderPage = ejs.render(callPage,{
-                userId:req.session.userId,
-                roomId:roomId,
-                flg:true
-            })
-            res.writeHead(200,{"Content-Type":"text/html"})
-            res.write(renderPage)
-            res.end()
+            userId = req.session.userId
+        }else{
+            userId = req.session.userId
+        }
+        req.session.callFlg = true
+        console.log("gg")
+        console.log(roomId)
+        let renderPage = ejs.render(joinPage,{
+            roomName:roomName,
+            roomId:roomId,
+            userId:userId
+        })
+        res.writeHead(200,{"Content-Type":"text/html"})
+        res.write(renderPage)
+        res.end()
+    }else{
+        res.writeHead(302, {
+            'Location': '/main'
+        });
+        res.end();
+    }
+
+})
+app.get("/call/:id",(req,res)=>{
+    if(req.session.userId && req.session.callFlg){
+        req.session.callFlg = false
+        let roomId = req.params.id
+        console.log(roomId)
+        let co = 0
+        let roomName;
+        roomList.forEach((i)=>{
+            if(i.roomId == roomId){
+                roomName = i.roomName
+            }
+        })
+        roomList.forEach((i)=>{
+            if(i.roomId == roomId){
+                co+=1
+            }
+        })
+        if(co != 0){
+            console.log("a")
+            if(req.session.userId){
+                let renderPage = ejs.render(callPage,{
+                    userId:req.session.userId,
+                    roomId:roomId,
+                    flg:false,
+                    roomName:roomName
+                })
+                res.writeHead(200,{"Content-Type":"text/html"})
+                res.write(renderPage)
+                res.end()
+            }else{
+                req.session.userId = uuidv4()
+                let renderPage = ejs.render(callPage,{
+                    userId:req.session.userId,
+                    roomId:roomId,
+                    flg:true
+                })
+                res.writeHead(200,{"Content-Type":"text/html"})
+                res.write(renderPage)
+                res.end()
+            }
+        }else{
+            res.writeHead(302, {
+                'Location': '/main'
+            });
+            res.end();
         }
     }else{
         console.log("b")
         res.writeHead(302, {
             'Location': '/main'
-          });
-         res.end();
+        });
+        res.end();
     }
 
 })
@@ -151,6 +203,7 @@ io.on("connection",(socket)=>{
             }
         })
         if(co == 0){
+            console.log("debug")
             userList.push(createData.createUser(userId,data.page))
             console.log(userList)
         }
@@ -168,6 +221,7 @@ io.on("connection",(socket)=>{
         let roomName = data.roomName
         let pass = data.pass
         let co = 0
+        let userName = ""
         roomList.forEach((i)=>{
             if(i.host == userId){
                 co+=1
@@ -175,14 +229,16 @@ io.on("connection",(socket)=>{
         })
         if(co == 0){
             roomList.push(createData.createRoomData(host,pass,roomName,true))
+            io.to(userId).emit("roomDatas",{id:roomList[roomList.length-1].roomId})
             console.log(roomList)
         }else{
             io.to(userId).emit("createError","error1")
         }
     })
     socket.on("connectionMeet",(data)=>{
+        console.log("debug23")
         console.log(data.roomId)
-        io.to(data.roomId).emit("joinUser",{userId:userId,listData:createData.createRoomUser(data.roomId,userId,"user",null)})
+        io.to(data.roomId).emit("joinUser",{userId:userId,listData:createData.createRoomUser(data.roomId,userId,userName,null)})
         socket.join(data.roomId)
         userList.forEach((i)=>{
             if(i.userId == userId){
@@ -193,7 +249,7 @@ io.on("connection",(socket)=>{
         roomList.forEach((i)=>{
             if(i.roomId == data.roomId){
                 roomID = data.roomId
-                i.userList.push(createData.createRoomUser(data.roomId,userId,"user",null))
+                i.userList.push(createData.createRoomUser(data.roomId,userId,userName,null))
                 console.log(i.userList)
                 io.to(userId).emit("setUserNew",{userId:userId,userList:i.userList})
             }
@@ -210,6 +266,10 @@ io.on("connection",(socket)=>{
     })
     socket.on("mikeState",(data)=>{
         
+    })
+    socket.on("joinUser",(data)=>{
+        userName = data.userName
+        io.to(userId).emit("moveCall",{})
     })
     socket.on("disconnect",()=>{
         userList.forEach((i,index)=>{

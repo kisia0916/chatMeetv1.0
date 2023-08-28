@@ -15,3 +15,6 @@ const createRoom = ()=>{
     Socket.emit("createRoom",{host:userId,roomName:roomName,pass:roomPass})
 }
 
+Socket.on("roomDatas",(data)=>{
+    location.href = `/join/${data.id}`
+})

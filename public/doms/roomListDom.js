@@ -3,7 +3,7 @@ const roomListDom = (roomList)=>{
     let html = roomList.map((i)=>{
         return `
         <div class="topSpace"></div>
-        <a href="/call/${i.roomId}">
+        <a href="/join/${i.roomId}">
             <div class="roomCard">
                 <div class="roomCardLeft">
                     <img src="${i.icon}" class="roomIcon" />

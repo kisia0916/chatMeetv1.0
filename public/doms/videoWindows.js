@@ -12,7 +12,7 @@ const videoWindow = (userList,userId)=>{
                             <video id = "myVideo" class="videoMainWindow" muted="muted" autoplay></video>
                         </div>
                         <div class="videoWindowNameWarpp">
-                            <span class="videoWindowName">userName</span>
+                            <span class="videoWindowName">${i.name}</span>
                         </div>
                     </div>
                 `
@@ -23,7 +23,7 @@ const videoWindow = (userList,userId)=>{
                             <video id = "myVideo"  class="videoMainWindow" muted="muted" width="600" height="500" autoplay></video>
                         </div>
                         <div class="videoWindowNameWarpp">
-                            <span class="videoWindowName">userName</span>
+                            <span class="videoWindowName">${i.name}</span>
                         </div>
                     </div>
                 `
@@ -31,23 +31,23 @@ const videoWindow = (userList,userId)=>{
         }else{
             if(index == 0){
                 return`
-                    <div class="videoWindowMain firstVideo">
+                    <div class="videoWindowMain firstVideo" id="2video:${i.userId}">
                     <div class="videoWindowWarpp">
                         <video id = "video:${i.userId}" class="videoMainWindow" muted="muted" width="600" height="500" autoplay></video>
                     </div>
                     <div class="videoWindowNameWarpp">
-                        <span class="videoWindowName">userName</span>
+                        <span class="videoWindowName">${i.name}</span>
                     </div>
                     </div>
                 `
             }else{
                 return`
-                    <div class="videoWindowMain">
+                    <div class="videoWindowMain" id="2video:${i.userId}">
                     <div class="videoWindowWarpp">
                         <video id = "video:${i.userId}" muted="muted" class="videoMainWindow" width="600" height="500" autoplay></video>
                     </div>
                     <div class="videoWindowNameWarpp">
-                        <span class="videoWindowName">userName</span>
+                        <span class="videoWindowName">${i.name}</span>
                     </div>
                     </div>
                 `
@@ -56,14 +56,15 @@ const videoWindow = (userList,userId)=>{
     })
     return html
 }
-const videoWindow2 = (userId)=>{
+const videoWindow2 = (userId,un)=>{
+    console.log("klppl@l@l@")
     let html = `
-        <div class="videoWindowMain firstVideo">
+        <div class="videoWindowMain firstVideo" id="2video:${userId}">
         <div class="videoWindowWarpp">
             <video id = "video:${userId}" class="videoMainWindow" muted="muted" width="600" height="500" autoplay></video>
         </div>
         <div class="videoWindowNameWarpp">
-            <span class="videoWindowName">userName</span>
+            <span class="videoWindowName">${un}</span>
         </div>
         </div>
     `

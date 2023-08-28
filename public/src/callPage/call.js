@@ -1,5 +1,6 @@
 let userId = document.getElementById("userId").textContent
 let roomId = document.getElementById("roomId").textContent
+console.log(userId,roomId)
 let flg = document.getElementById("flg").textContent
 if(flg){
     Socket.emit("createdSocketConnection",{userId:userId,page:"/call"})
@@ -7,32 +8,120 @@ if(flg){
 }
 Socket.emit("connectionMeet",{roomId:roomId,userId:userId})
 Socket.on("userDiscon",(data)=>{
-    alert(data.data)
+    // alert(data.data)
+    let disconVideo = document.getElementById(`2video:${data.data}`)
+    let disconAudio = document.getElementById(`audio:${data.data}`)
+
+    console.log(disconVideo.classList)
+    disconVideo.remove()
+    disconAudio.remove()
+    // if(disconVideo.classList.length>1){
+    let warpp = document.querySelector(".roomCenterMain")
+    let firstChild = warpp.querySelector(':first-child');
+    console.log(firstChild)
+    firstChild.classList.add("firstVideo")
+    // }
+    let warpp2 = document.getElementById("audioWindowsWaerpp")
+    let firstChild2 = warpp2.querySelector(':first-child');
+    console.log(firstChild2)
+    firstChild2.classList.add("firstAudio")
+    conList.forEach((i,index)=>{
+        if(i.peer == data.data){
+            conList.splice(index,1)
+        }
+    })
+    streamList.forEach((i,index)=>{
+        if(i.userId == data.data){
+            streamList.splice(index,1)
+        }
+    })
+    peerList.forEach((i,index)=>{
+        if(i.userId == data.data){
+            peerList.splice(index,1)
+        }
+    })
+    audioTagList.forEach((i,index)=>{
+        if(i == `audio:${data.data}`){
+            audioTagList.splice(index,1)
+        }
+    })
+    audioList.forEach((i,index)=>{
+        if(i.userId == data.data){
+            audioList.splice(index,1)
+        }
+    })
+    userList.forEach((i,index)=>{
+        if(i.userId == data.data){
+            userList.splice(index,1)
+        }
+    })
+    console.log(conList)
+    console.log(streamList)
+    console.log(peerList)
+    console.log(audioTagList)
+    console.log(audioList)
+    console.log(userList)
+    
 })
 
-let camFlg = true
-let mikeFlg = true
-let headFlg = true
+let camFlg = window.sessionStorage.getItem(["cam"])
+let mikeFlg = window.sessionStorage.getItem(["mike"])
+let headFlg = window.sessionStorage.getItem(["audio"])
+
+if(window.sessionStorage.getItem(["cam"]) == "true"){
+    camFlg = true
+}else{
+    camFlg = false
+    let camButton = document.querySelector(".camChangeText")
+    if(camButton){
+        camButton.textContent = "OFF"
+        camButton.style.color = "#ff3838"
+    }
+}
+if(window.sessionStorage.getItem(["mike"]) == "true"){
+    mikeFlg = true
+}else{
+    mikeFlg = false
+    let camButton = document.querySelector(".mikeChangeText")
+    if(camButton){
+        camButton.textContent = "OFF"
+        camButton.style.color = "#ff3838"
+    }
+}
+if(window.sessionStorage.getItem(["audio"]) == "true"){
+    headFlg = true
+}else{
+    headFlg = false
+    let audioIcon = document.querySelector(".audioIcon")
+    let audioIcon2 = document.querySelector(".audioIcon2")
+    console.log(audioIcon)
+
+    audioIcon.style.display = "none"
+    audioIcon2.style.display = "block" 
+}
 let camStream = null
 let backStream = null
 let mikeStream = null
 let audioTagList = []
 const caminit = (firstFlg)=>{
-    console.log("caminit")
-    let myVideo = document.getElementById("myVideo")
-    console.log(myVideo)
-    navigator.mediaDevices.getUserMedia({video : camFlg})
-    .then((stream)=>{
-        camStream = stream
-        backStream = stream
-        myVideo.srcObject = camStream
-        if(firstFlg){
-            sendVideo(camStream)
+    console.log(camFlg)
+    if(camFlg){
+        console.log("caminit")
+        let myVideo = document.getElementById("myVideo")
+        console.log(myVideo)
+        navigator.mediaDevices.getUserMedia({video : camFlg})
+        .then((stream)=>{
+            camStream = stream
+            backStream = stream
+            myVideo.srcObject = camStream
+            if(firstFlg){
+                sendVideo(camStream)
+            }
         }
+        ).catch((err)=>{
+            console.log("camError"+err)
+        })
     }
-    ).catch((err)=>{
-        console.log("camError"+err)
-    })
 }
 
 const audioInit = (flg)=>{
