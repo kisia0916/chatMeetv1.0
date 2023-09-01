@@ -1,5 +1,6 @@
 let userId = document.getElementById("userId").textContent
 console.log(userId)
+
 if(!userId){
     console.log(userId)
     location.href = "/catchpage"

@@ -10,3 +10,13 @@ const initPage = (roomList)=>{
 const moveCreatet = ()=>{
     location.href = "/mkcall"
 }
+const copyId = (Id,event)=>{
+
+    console.log("un")
+    let content = document.getElementById('roomIdAria'+Id);
+    console.log(content)
+    console.log(Id)
+    navigator.clipboard.writeText(content.value).then()
+    // content.select();
+    // document.execCommand('copy');
+}

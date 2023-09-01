@@ -1,10 +1,26 @@
+function sanitizeInput(input) {
+    // 文字列内の特殊文字をエスケープします
+    return input.replace(/[&<>"'/]/g, (match) => {
+      const escapeMap = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        '/': '&#x2F;',
+      };
+      return escapeMap[match];
+    });
+  }
 const roomListDom = (roomList)=>{
     console.log(roomList)
     let html = roomList.map((i)=>{
+        i.roomName = sanitizeInput(i.roomName)
         return `
         <div class="topSpace"></div>
-        <a href="/join/${i.roomId}">
             <div class="roomCard">
+                <a href="/join/${i.roomId}" class="link">
+                </a>
                 <div class="roomCardLeft">
                     <img src="${i.icon}" class="roomIcon" />
                 </div>
@@ -16,14 +32,15 @@ const roomListDom = (roomList)=>{
                         <span class="material-symbols-outlined roomPersonIcon">
                             person
                         </span>
-                        <span class="roomCardNum">12</span>
-                        <button class="RoomListlinkCopyButton"><span class="material-symbols-outlined">
-                            link
-                        </span></button>
+                        <span class="roomCardNum">${i.userList.length}</span>
+                        <textarea id="roomIdAria${i.roomId}" style="display:none">${i.roomId}</textarea>
+                        <button id="${i.roomId}" class="RoomListlinkCopyButton" onclick="copyId(this.id,event)"><span class="material-symbols-outlined">
+                        link
+                    </span></button>
                     </div>
                 </div>
-            </div>
-        </a>
+            </div>                        
+
         `
     }).join("")
     if(roomList.length == 0){

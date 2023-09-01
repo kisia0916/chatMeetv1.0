@@ -2,7 +2,20 @@ let cam = true
 let mike = true
 let audio = true
 let userId = document.querySelector(".userId").textContent
-
+function sanitizeInput(input) {
+    // 文字列内の特殊文字をエスケープします
+    return input.replace(/[&<>"'/]/g, (match) => {
+      const escapeMap = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        '/': '&#x2F;',
+      };
+      return escapeMap[match];
+    });
+  }
 if(window.sessionStorage.getItem(["userId"])){
     userId = window.sessionStorage.getItem(["userId"])
     Socket.emit("createdSocketConnection",{userId:userId,page:"/call"})
@@ -15,6 +28,7 @@ const join = ()=>{
     let userName = document.querySelector(".createInput").value
     let userId = document.querySelector(".userId").textContent
     let roomId = document.querySelector(".roomId").textContent
+    userName = sanitizeInput(userName)
     window.sessionStorage.setItem(["cam"],cam)
     window.sessionStorage.setItem(["mike"],mike)
     window.sessionStorage.setItem(["audio"],audio)

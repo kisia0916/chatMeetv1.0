@@ -6,6 +6,15 @@ if(flg){
     Socket.emit("createdSocketConnection",{userId:userId,page:"/call"})
     window.sessionStorage.setItem(["userId"],userId)
 }
+window.addEventListener("beforeunload",(e)=>{
+    location.href = "/main"
+})
+window.addEventListener('popstate', function(event) {
+    location.href = "/main"
+ });
+ window.addEventListener("offline", function() {
+    location.href = "/main"
+   });
 Socket.emit("connectionMeet",{roomId:roomId,userId:userId})
 Socket.on("userDiscon",(data)=>{
     // alert(data.data)
@@ -67,11 +76,15 @@ Socket.on("userDiscon",(data)=>{
 let camFlg = window.sessionStorage.getItem(["cam"])
 let mikeFlg = window.sessionStorage.getItem(["mike"])
 let headFlg = window.sessionStorage.getItem(["audio"])
-
+let camStyle = "none"
+let mkStyle = "none"
+let headStyle = "none"
 if(window.sessionStorage.getItem(["cam"]) == "true"){
     camFlg = true
+
 }else{
     camFlg = false
+    camStyle = "block"
     let camButton = document.querySelector(".camChangeText")
     if(camButton){
         camButton.textContent = "OFF"
@@ -80,8 +93,10 @@ if(window.sessionStorage.getItem(["cam"]) == "true"){
 }
 if(window.sessionStorage.getItem(["mike"]) == "true"){
     mikeFlg = true
+
 }else{
     mikeFlg = false
+    mkStyle = "block"
     let camButton = document.querySelector(".mikeChangeText")
     if(camButton){
         camButton.textContent = "OFF"
@@ -90,12 +105,13 @@ if(window.sessionStorage.getItem(["mike"]) == "true"){
 }
 if(window.sessionStorage.getItem(["audio"]) == "true"){
     headFlg = true
+
 }else{
     headFlg = false
+    headStyle = "block"
     let audioIcon = document.querySelector(".audioIcon")
     let audioIcon2 = document.querySelector(".audioIcon2")
     console.log(audioIcon)
-
     audioIcon.style.display = "none"
     audioIcon2.style.display = "block" 
 }
@@ -123,13 +139,48 @@ const caminit = (firstFlg)=>{
         })
     }
 }
-
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let soundAudioFLG = false
 const audioInit = (flg)=>{
     if(mikeFlg){
         navigator.mediaDevices.getUserMedia({ audio: true })
         .then(function(stream) {
             mikeStream = stream
             const mediaRecorder = new MediaRecorder(mikeStream);
+            const microphone = audioContext.createMediaStreamSource(stream);
+            const ana = audioContext.createAnalyser()
+            microphone.connect(ana)
+            ana.fftSize = 256
+            const checkSound = 20
+            const bufferLength = ana.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            let myWarpp = document.getElementById("3video:My")
+            const detectSound = ()=> {
+                ana.getByteFrequencyData(dataArray);
+                const average = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length;
+                if(average>checkSound){
+                    if(!soundAudioFLG){
+                        // Socket.emit("soundAudio",{userId:userId,roomId:roomId})
+                        soundAudioFLG = true
+                        myWarpp.style.border = "solid 1px #50FA7B"
+                        console.log("音声を検知")
+                        sendMess()
+                    }
+                    // mikeStream = stream
+                }else{
+                    // mikeStream = null
+                    if(soundAudioFLG){
+                        soundAudioFLG = false
+                        myWarpp.style.border = "none"
+                        console.log("オフを検知")
+
+                        sendMess()
+                    }
+                }
+                // 再帰的に音を検出
+                requestAnimationFrame(detectSound);
+              }
+              detectSound()
             // const audioElement = document.createElement('audio');
             // audioElement.controls = true;
             // audioElement.id = "myAudio"
@@ -146,11 +197,13 @@ const audioInit = (flg)=>{
             mediaRecorder.ondataavailable = function(event) {
             if (event.data.size > 0) {
                 // 録音データの処理
+                console.log("4")
             }
             };
         
             mediaRecorder.onstop = function() {
             // 録音停止後の処理
+                console.log("5")
             };
         
             mediaRecorder.start();
@@ -167,6 +220,10 @@ const audioInit = (flg)=>{
 const changeMike = ()=>{
     if(mikeFlg){
         mikeFlg = false
+        sendState("mk",false)
+        let mkStateMy = document.getElementById("mkStateMy")
+        console.log(mkStateMy)
+        mkStateMy.style.display = "block"
         let mikeButton = document.querySelector(".mikeChangeText")
         if(mikeButton){
             mikeButton.textContent = "OFF"
@@ -179,6 +236,10 @@ const changeMike = ()=>{
         mikeStream = null
     }else{
         mikeFlg = true
+        sendState("mk",true)
+        let mkStateMy = document.getElementById("mkStateMy")
+        console.log(mkStateMy)
+        mkStateMy.style.display = "none"
         let mikeButton = document.querySelector(".mikeChangeText")
         if(mikeButton){
             mikeButton.textContent = "ON"
@@ -191,7 +252,43 @@ const changeMike = ()=>{
             // const audioElement = document.getElementById("myAudio")
             // audioElement.controls = true;
             // audioElement.srcObject = mikeStream; // Blobではなく直接ストリームを設 
-            // audioElement.play()       
+            // audioElement.play()
+
+            ////
+            const microphone = audioContext.createMediaStreamSource(stream);
+            const ana = audioContext.createAnalyser()
+            microphone.connect(ana)
+            ana.fftSize = 256
+            const checkSound = 20
+            const bufferLength = ana.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            let myWarpp = document.getElementById("3video:My")
+            const detectSound = ()=> {
+                ana.getByteFrequencyData(dataArray);
+                const average = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length;
+                if(average>checkSound){
+                    if(!soundAudioFLG){
+                        // Socket.emit("soundAudio",{userId:userId,roomId:roomId})
+                        soundAudioFLG = true
+                        myWarpp.style.border = "solid 1px #50FA7B"
+                        console.log("音声を検知")
+                        sendMess()
+                    }
+                    // mikeStream = stream
+                }else{
+                    // mikeStream = null
+                    if(soundAudioFLG){
+                        soundAudioFLG = false
+                        myWarpp.style.border = "none"
+                        console.log("オフを検知")
+
+                        sendMess()
+                    }
+                }
+                // 再帰的に音を検出
+                requestAnimationFrame(detectSound);
+              }
+              detectSound()
             mediaRecorder.ondataavailable = function(event) {
             if (event.data.size > 0) {
                 // 録音データの処理
@@ -218,6 +315,10 @@ const camChange = ()=>{
 
     if(camFlg){
         camFlg = false
+        sendState("cam",false)
+        let mkStateMy = document.getElementById("camStateMy")
+        console.log(mkStateMy)
+        mkStateMy.style.display = "block"
         peerList = []
         let camButton = document.querySelector(".camChangeText")
 
@@ -234,6 +335,10 @@ const camChange = ()=>{
         camStream = null
     }else{
         camFlg = true
+        sendState("cam",true)
+        let mkStateMy = document.getElementById("camStateMy")
+        console.log(mkStateMy)
+        mkStateMy.style.display = "none"
         let camButton = document.querySelector(".camChangeText")
 
         Socket.emit("camState",{userId:p2pID,roomId:roomId,flg:false})
@@ -257,6 +362,10 @@ const camChange = ()=>{
 }
 const changeAudios = ()=>{
     if(headFlg){
+        sendState("head",false)
+        let mkStateMy = document.getElementById("headStateMy")
+        console.log(mkStateMy)
+        mkStateMy.style.display = "block"
         audioTagList.forEach((i)=>{
             console.log(1)
             console.log(i)
@@ -273,6 +382,10 @@ const changeAudios = ()=>{
             headFlg = false
         })
     }else{
+        sendState("head",true)
+        let mkStateMy = document.getElementById("headStateMy")
+        console.log(mkStateMy)
+        mkStateMy.style.display = "none"
         audioTagList.forEach((i)=>{
             console.log(2)
             console.log(i)
@@ -292,7 +405,11 @@ const changeAudios = ()=>{
 const moveMeet = ()=>{
     location.href = "/main"
 }
+const sendState = (media,state)=>{
+    Socket.emit("mediaState",{userId:userId,media:media,state:state,roomId:roomId})
+}
 Socket.on("camState",(data)=>{
+    console.log("aaaaklkkkaiojo")
     let audioDom = document.getElementById("video:"+data.userId)
     console.log("camState")
     if(audioDom){
@@ -301,6 +418,18 @@ Socket.on("camState",(data)=>{
         }else{
             audioDom.style.display = "block"
         }
+    }
+})
+Socket.on("mediaChange",(data)=>{
+    let userId = data.userId
+    let state = data.state
+    let media = data.media
+    if(state){
+        let dom = document.getElementById(media+"State"+userId)
+        dom.style.display = "none"
+    }else{
+        let dom = document.getElementById(media+"State"+userId)
+        dom.style.display = "block"
     }
 })
 // Socket.on("joinUser",(data)=>{

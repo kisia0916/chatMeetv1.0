@@ -1,3 +1,4 @@
+
 let p2pID = document.getElementById("userId").textContent
 let peer = new Peer(p2pID,{
     host: 'peerserverinheroku-2753ea32a44b.herokuapp.com',
@@ -11,7 +12,7 @@ let peerList = []
 let audioList = []
 let userList = []
 let firstFlg = true
-
+let firstFLG2 = true
 const sendVideo = (stream)=>{
     console.log("1")
     userList.forEach((i)=>{
@@ -63,26 +64,26 @@ Socket.on("setUserNew",async(data)=>{
     let videoWarpp = document.querySelector(".roomCenterMain")
     let audioWarpp = document.getElementById("audioWindowsWaerpp")
     audioWarpp.innerHTML = audioDoms(userList,p2pID)
-    videoWarpp.innerHTML = videoWindow(userList,p2pID)
+    videoWarpp.innerHTML = videoWindow(userList,p2pID,camStyle,mkStyle,headStyle) 
     if(userList.length-1>0){
         console.log("eee")
         console.log("2")
-        userList.forEach((i)=>{
-            if(i.userId != p2pID){
-                console.log(i.userId)
-                const conn = peer.connect(i.userId);
-                conList.push(conn)
-                conn.on("open",()=>{
-                    conCO +=1
-                    console.log(`${i.userId}に接続しました`)
-                    if(conCO >= userList.length-1){
-                        console.log(camStream)
-                        // caminit(true)
-                        // audioInit(true)
-                    }
-                })
-            }
-        })
+        // userList.forEach((i)=>{
+        //     if(i.userId != p2pID){
+        //         console.log(i.userId)
+        //         // const conn = peer.connect(i.userId);
+        //         // conList.push(conn)
+        //         // conn.on("open",()=>{
+        //         //     conCO +=1
+        //         //     console.log(`${i.userId}に接続しました`)
+        //         //     if(conCO >= userList.length-1){
+        //         //         console.log(camStream)
+        //         //         // caminit(true)
+        //         //         // audioInit(true)
+        //         //     }
+        //         // })
+        //     }
+        // })
     }else{
         console.log("1")
         caminit(true)
@@ -95,12 +96,13 @@ Socket.on("joinUser",(data)=>{
     try{
         videoWarpp.classList.remove("firstVideo")
     }catch{}
-    videoWarpp.insertAdjacentHTML('beforebegin',videoWindow2(data.userId,data.listData.name))
+    videoWarpp.insertAdjacentHTML('beforebegin',videoWindow2(data.userId,data.listData.name,camStyle,mkStyle,headStyle))
     let audioWarpp = document.querySelector(".firstAudio")
     try{
         audioWarpp.classList.remove("firstAudio")
     }catch{}
     audioWarpp.insertAdjacentHTML('beforebegin',audioDoms2(data.userId))
+    console.log(data.userId)
     const conn = peer.connect(data.userId)
     conList.push(conn)
     conn.on("open",()=>{
@@ -116,9 +118,42 @@ function sleep(waitMsec) {
     while (new Date() - startMsec < waitMsec);
   }
 peer.on('connection', (conn) => {
-    console.log(`${conn.peer}からの接続あり`);
-    caminit(true)
-    audioInit(true)
+
+    let dataFLG = false
+    console.log("ooooooooooooooooooooooooooooooooooooooooooooooooo")
+    conn.on("data",(data)=>{
+        dataFLG = true
+        console.log(data)
+        let userWarp = document.getElementById(`3video:${conn.peer}`)
+        if(data.flg){
+            userWarp.style.border = "solid 1px #50FA7B"
+        }else{
+            userWarp.style.border = "none"
+        }
+    })
+    if(!dataFLG){
+        // firstFLG2 = false
+        console.log(`${conn.peer}からの接続あり`);
+        let flg = true
+        let conn2
+        conList.forEach((i)=>{
+            if(i.peer == conn.peer){
+                flg = false
+            }
+        })
+        if(flg){
+            conn2 = peer.connect(conn.peer);
+            conList.push(conn2)
+        }
+        try{
+            conn2.on("open",()=>{
+                console.log(`${conn.peer}に接続しました`)
+        
+            })
+        }catch{}
+        caminit(true)
+        audioInit(true)
+    }
 });
 peer.on("call",(call)=>{
     console.log("bbb")
@@ -144,3 +179,12 @@ peer.on("call",(call)=>{
         }
     })
 })
+const sendMess = ()=>{
+    conList.forEach((i)=>{
+        if(soundAudioFLG){
+            i.send({flg:true})
+        }else{
+            i.send({flg:false})
+        }
+    })
+}

@@ -111,7 +111,23 @@ app.get("/join/:id",(req,res)=>{
 
 })
 app.get("/call/:id",(req,res)=>{
-    if(req.session.userId && req.session.callFlg){
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    let isRoom = true
+    let room = null
+    roomList.forEach((i)=>{
+        if(i.roomId == req.params.id){
+            room = i.userList
+        }
+    })
+    console.log(room)
+    if(room){
+        room.forEach((i)=>{
+            if(i.userId == req.session.userId){
+                isRoom = false
+            }
+        })
+    }
+    if(req.session.userId && req.session.callFlg && isRoom){
         req.session.callFlg = false
         let roomId = req.params.id
         console.log(roomId)
@@ -122,6 +138,8 @@ app.get("/call/:id",(req,res)=>{
                 roomName = i.roomName
             }
         })
+        console.log("ggggggggggggg")
+        console.log(roomList)
         roomList.forEach((i)=>{
             if(i.roomId == roomId){
                 co+=1
@@ -140,6 +158,7 @@ app.get("/call/:id",(req,res)=>{
                 res.write(renderPage)
                 res.end()
             }else{
+                console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
                 req.session.userId = uuidv4()
                 let renderPage = ejs.render(callPage,{
                     userId:req.session.userId,
@@ -151,6 +170,7 @@ app.get("/call/:id",(req,res)=>{
                 res.end()
             }
         }else{
+            console.log("koxa")
             res.writeHead(302, {
                 'Location': '/main'
             });
@@ -236,24 +256,24 @@ io.on("connection",(socket)=>{
         }
     })
     socket.on("connectionMeet",(data)=>{
-        console.log("debug23")
-        console.log(data.roomId)
-        io.to(data.roomId).emit("joinUser",{userId:userId,listData:createData.createRoomUser(data.roomId,userId,userName,null)})
-        socket.join(data.roomId)
-        userList.forEach((i)=>{
-            if(i.userId == userId){
-                i.page = `/call/${data.roomId}`
-            }
-            console.log(userList)
-        })
-        roomList.forEach((i)=>{
-            if(i.roomId == data.roomId){
-                roomID = data.roomId
-                i.userList.push(createData.createRoomUser(data.roomId,userId,userName,null))
-                console.log(i.userList)
-                io.to(userId).emit("setUserNew",{userId:userId,userList:i.userList})
-            }
-        })
+            console.log("debug23")
+            console.log(data.roomId)
+            io.to(data.roomId).emit("joinUser",{userId:userId,listData:createData.createRoomUser(data.roomId,userId,userName,null)})
+            socket.join(data.roomId)
+            userList.forEach((i)=>{
+                if(i.userId == userId){
+                    i.page = `/call/${data.roomId}`
+                }
+                console.log(userList)
+            })
+            roomList.forEach((i)=>{
+                if(i.roomId == data.roomId){
+                    roomID = data.roomId
+                    i.userList.push(createData.createRoomUser(data.roomId,userId,userName,null))
+                    console.log(i.userList)
+                    io.to(userId).emit("setUserNew",{userId:userId,userList:i.userList})
+                }
+            })
     })
     socket.on("camState",(data)=>{
         let userId = data.userId
@@ -271,7 +291,16 @@ io.on("connection",(socket)=>{
         userName = data.userName
         io.to(userId).emit("moveCall",{})
     })
+    socket.on("soundAudio",(data)=>{
+        
+    })
+    socket.on("mediaState",(data)=>{
+        console.log("socketlllllll")
+        console.log(data.roomId)
+        io.to(data.roomId).emit("mediaChange",data)
+    })
     socket.on("disconnect",()=>{
+        roomId = ""
         userList.forEach((i,index)=>{
             if(i.userId == userId){
                 userList.splice(index,1)
@@ -298,6 +327,8 @@ io.on("connection",(socket)=>{
             })
         }
     })
+    console.log("aaasasa")
+    console.log(roomList)
 })
 server.listen(process.env.PORT||3000,()=>{
     console.log("server run")
