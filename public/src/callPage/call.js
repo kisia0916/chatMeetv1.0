@@ -1,3 +1,5 @@
+const { Socket } = require("socket.io")
+
 let userId = document.getElementById("userId").textContent
 let roomId = document.getElementById("roomId").textContent
 console.log(userId,roomId)
@@ -115,6 +117,7 @@ if(window.sessionStorage.getItem(["audio"]) == "true"){
     audioIcon.style.display = "none"
     audioIcon2.style.display = "block" 
 }
+Socket.emit("firstMedia",{userId:userId,roomId:roomId,cam:camFlg,mike:mikeFlg,head:headFlg})
 let camStream = null
 let backStream = null
 let mikeStream = null

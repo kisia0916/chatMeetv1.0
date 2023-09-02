@@ -284,6 +284,9 @@ io.on("connection",(socket)=>{
             io.to(roomId).emit("camState",{userId:data.userId,flg:false})
         }
     })
+    socket.on("firstMedia",(data)=>{
+        io.to(data.roomId).emit("firstMedia",data)///////////////////////////ここまで
+    })
     socket.on("mikeState",(data)=>{
         
     })
